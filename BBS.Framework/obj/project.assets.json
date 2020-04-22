@@ -6358,11 +6358,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\DEMO_SPACES\\BBS\\BBS.Framework\\BBS.Framework.csproj",
+      "projectUniqueName": "E:\\git_spaces\\BBS\\BBS.Framework\\BBS.Framework.csproj",
       "projectName": "BBS.Framework",
-      "projectPath": "E:\\DEMO_SPACES\\BBS\\BBS.Framework\\BBS.Framework.csproj",
+      "projectPath": "E:\\git_spaces\\BBS\\BBS.Framework\\BBS.Framework.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\DEMO_SPACES\\BBS\\BBS.Framework\\obj\\",
+      "outputPath": "E:\\git_spaces\\BBS\\BBS.Framework\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",

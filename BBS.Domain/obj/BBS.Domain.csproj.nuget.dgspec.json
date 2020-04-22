@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\DEMO_SPACES\\BBS\\BBS.Domain\\BBS.Domain.csproj": {}
+    "E:\\git_spaces\\BBS\\BBS.Domain\\BBS.Domain.csproj": {}
   },
   "projects": {
-    "E:\\DEMO_SPACES\\BBS\\BBS.Domain\\BBS.Domain.csproj": {
+    "E:\\git_spaces\\BBS\\BBS.Domain\\BBS.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\DEMO_SPACES\\BBS\\BBS.Domain\\BBS.Domain.csproj",
+        "projectUniqueName": "E:\\git_spaces\\BBS\\BBS.Domain\\BBS.Domain.csproj",
         "projectName": "BBS.Domain",
-        "projectPath": "E:\\DEMO_SPACES\\BBS\\BBS.Domain\\BBS.Domain.csproj",
+        "projectPath": "E:\\git_spaces\\BBS\\BBS.Domain\\BBS.Domain.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "E:\\DEMO_SPACES\\BBS\\BBS.Domain\\obj\\",
+        "outputPath": "E:\\git_spaces\\BBS\\BBS.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",

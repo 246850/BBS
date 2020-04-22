@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\DEMO_SPACES\\BBS\\BBS.ConsoleApp1\\BBS.ConsoleApp1.csproj",
+      "projectUniqueName": "E:\\git_spaces\\BBS\\BBS.ConsoleApp1\\BBS.ConsoleApp1.csproj",
       "projectName": "BBS.ConsoleApp1",
-      "projectPath": "E:\\DEMO_SPACES\\BBS\\BBS.ConsoleApp1\\BBS.ConsoleApp1.csproj",
+      "projectPath": "E:\\git_spaces\\BBS\\BBS.ConsoleApp1\\BBS.ConsoleApp1.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\DEMO_SPACES\\BBS\\BBS.ConsoleApp1\\obj\\",
+      "outputPath": "E:\\git_spaces\\BBS\\BBS.ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",

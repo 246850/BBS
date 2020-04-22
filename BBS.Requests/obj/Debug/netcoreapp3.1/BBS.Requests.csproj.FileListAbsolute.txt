@@ -9,3 +9,14 @@ E:\DEMO_SPACES\BBS\BBS.Requests\obj\Debug\netcoreapp3.1\BBS.Requests.csprojAssem
 E:\DEMO_SPACES\BBS\BBS.Requests\bin\Debug\netcoreapp3.1\BBS.Framework.dll
 E:\DEMO_SPACES\BBS\BBS.Requests\bin\Debug\netcoreapp3.1\BBS.Framework.pdb
 E:\DEMO_SPACES\BBS\BBS.Requests\obj\Debug\netcoreapp3.1\BBS.Requests.csproj.CopyComplete
+E:\git_spaces\BBS\BBS.Requests\bin\Debug\netcoreapp3.1\BBS.Requests.deps.json
+E:\git_spaces\BBS\BBS.Requests\bin\Debug\netcoreapp3.1\BBS.Requests.dll
+E:\git_spaces\BBS\BBS.Requests\bin\Debug\netcoreapp3.1\BBS.Requests.pdb
+E:\git_spaces\BBS\BBS.Requests\bin\Debug\netcoreapp3.1\BBS.Framework.dll
+E:\git_spaces\BBS\BBS.Requests\bin\Debug\netcoreapp3.1\BBS.Framework.pdb
+E:\git_spaces\BBS\BBS.Requests\obj\Debug\netcoreapp3.1\BBS.Requests.csprojAssemblyReference.cache
+E:\git_spaces\BBS\BBS.Requests\obj\Debug\netcoreapp3.1\BBS.Requests.AssemblyInfoInputs.cache
+E:\git_spaces\BBS\BBS.Requests\obj\Debug\netcoreapp3.1\BBS.Requests.AssemblyInfo.cs
+E:\git_spaces\BBS\BBS.Requests\obj\Debug\netcoreapp3.1\BBS.Requests.csproj.CopyComplete
+E:\git_spaces\BBS\BBS.Requests\obj\Debug\netcoreapp3.1\BBS.Requests.dll
+E:\git_spaces\BBS\BBS.Requests\obj\Debug\netcoreapp3.1\BBS.Requests.pdb
