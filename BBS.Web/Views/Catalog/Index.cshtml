@@ -1,0 +1,31 @@
+﻿@model List<CatalogModel>
+@{
+    ViewData["Title"] = "全部话题";
+}
+<style>
+    .card-img-top{height:120px; border-radius:0}
+</style>
+<div class="tt-custom-mobile-indent container mt-3">
+    <div class="tt-categories-title">
+        <div class="tt-title">全部话题</div>
+    </div>
+    <div class="tt-categories-list mt-0">
+        <div class="card-columns">
+            @foreach (var item in Model)
+            {
+                <div class="card rounded-0 border-0">
+                    <img src="@item.Cover" class="card-img-top" alt="@item.Title">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-grow-1 bd-highlight"><a href="@Url.Action("List", "Catalog", new { id = item.Id})" title="@item.Title"><strong class="card-title">@item.Title</strong></a></div>
+                            <div class="bd-highlight">主题 - @item.TopicCount</div>
+                        </div>
+                        <p class="card-text"><small>@item.Description</small></p>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+

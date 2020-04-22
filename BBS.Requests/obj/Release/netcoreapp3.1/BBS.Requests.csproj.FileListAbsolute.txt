@@ -1,0 +1,11 @@
+E:\DEMO_SPACES\BBS\BBS.Requests\bin\Release\netcoreapp3.1\BBS.Requests.deps.json
+E:\DEMO_SPACES\BBS\BBS.Requests\bin\Release\netcoreapp3.1\BBS.Requests.dll
+E:\DEMO_SPACES\BBS\BBS.Requests\bin\Release\netcoreapp3.1\BBS.Requests.pdb
+E:\DEMO_SPACES\BBS\BBS.Requests\bin\Release\netcoreapp3.1\BBS.Framework.dll
+E:\DEMO_SPACES\BBS\BBS.Requests\bin\Release\netcoreapp3.1\BBS.Framework.pdb
+E:\DEMO_SPACES\BBS\BBS.Requests\obj\Release\netcoreapp3.1\BBS.Requests.csprojAssemblyReference.cache
+E:\DEMO_SPACES\BBS\BBS.Requests\obj\Release\netcoreapp3.1\BBS.Requests.AssemblyInfoInputs.cache
+E:\DEMO_SPACES\BBS\BBS.Requests\obj\Release\netcoreapp3.1\BBS.Requests.AssemblyInfo.cs
+E:\DEMO_SPACES\BBS\BBS.Requests\obj\Release\netcoreapp3.1\BBS.Requests.csproj.CopyComplete
+E:\DEMO_SPACES\BBS\BBS.Requests\obj\Release\netcoreapp3.1\BBS.Requests.dll
+E:\DEMO_SPACES\BBS\BBS.Requests\obj\Release\netcoreapp3.1\BBS.Requests.pdb

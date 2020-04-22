@@ -1,0 +1,57 @@
+﻿@model AccountModel
+@{
+    ViewData["Title"] = "账号登录";
+}
+<div class="container">
+    <div class="tt-tab-wrapper">
+        <div class="tt-wrapper-inner">
+            <ul class="nav nav-tabs pt-tabs-default" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link show active" href="javascript:void(0)"><span>登录</span></a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Account" asp-action="Register" class="nav-link"><span>注册</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade active show" id="tt-tab-01" role="tabpanel">
+                <div class="tt-wrapper-inner tt-layout-tab">
+                    <form asp-controller="Account" asp-action="Login" onsubmit="return doSubmit();" class="form-default">
+                        <div class="form-group">
+                            <label>账号</label>
+                            <input asp-for="Account1" type="text" class="form-control rounded-0">
+                        </div>
+                        <div class="form-group">
+                            <label>密码</label>
+                            <input asp-for="Password" type="password" class="form-control rounded-0">
+                        </div>
+                        <button type="submit" class="btn btn-success">登录</button>
+                        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
+                        <label class="text-danger">
+                            @Html.ValidationSummary()
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function doSubmit() {
+        var $Account1 = $("#@Html.IdFor(model=> model.Account1)"),
+            $Password = $("#@Html.IdFor(model=> model.Password)");
+        if (!/^[a-z|A-z|_]\w{3,29}$/.test($Account1.val())) {
+            layer.msg("账号格式不符合");
+            $Account1.focus();
+            return false;
+        }
+        if (!/^\w{6,20}$/.test($Password.val())) {
+            layer.msg("密码格式不符合");
+            $Password.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+

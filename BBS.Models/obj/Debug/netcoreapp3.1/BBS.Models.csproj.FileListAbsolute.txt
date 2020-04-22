@@ -1,0 +1,11 @@
+E:\DEMO_SPACES\BBS\BBS.Models\bin\Debug\netcoreapp3.1\BBS.Models.deps.json
+E:\DEMO_SPACES\BBS\BBS.Models\bin\Debug\netcoreapp3.1\BBS.Models.dll
+E:\DEMO_SPACES\BBS\BBS.Models\bin\Debug\netcoreapp3.1\BBS.Models.pdb
+E:\DEMO_SPACES\BBS\BBS.Models\bin\Debug\netcoreapp3.1\BBS.Framework.dll
+E:\DEMO_SPACES\BBS\BBS.Models\bin\Debug\netcoreapp3.1\BBS.Framework.pdb
+E:\DEMO_SPACES\BBS\BBS.Models\obj\Debug\netcoreapp3.1\BBS.Models.csprojAssemblyReference.cache
+E:\DEMO_SPACES\BBS\BBS.Models\obj\Debug\netcoreapp3.1\BBS.Models.AssemblyInfoInputs.cache
+E:\DEMO_SPACES\BBS\BBS.Models\obj\Debug\netcoreapp3.1\BBS.Models.AssemblyInfo.cs
+E:\DEMO_SPACES\BBS\BBS.Models\obj\Debug\netcoreapp3.1\BBS.Models.csproj.CopyComplete
+E:\DEMO_SPACES\BBS\BBS.Models\obj\Debug\netcoreapp3.1\BBS.Models.dll
+E:\DEMO_SPACES\BBS\BBS.Models\obj\Debug\netcoreapp3.1\BBS.Models.pdb

@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewData["Title"] - 社区后台</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Layui -->
+    <link href="~/layui/layui/css/layui.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/adminlte3/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="/adminlte3/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/adminlte3/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="/adminlte3/plugins/jquery/jquery.min.js"></script>
+    <style>
+        [class*=sidebar-dark] .brand-link {
+            border-bottom: none
+        }
+
+        .sidebar-dark-bg {
+            background-color: #222d32;
+        }
+
+        #menu-header {
+            color: #ffffff;
+            background: #1a2226;
+            overflow: hidden;
+            text-overflow: clip;
+            white-space: nowrap;
+            padding-top: .5rem;
+            padding-bottom: .5rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            font-size: .9rem;
+        }
+
+        .sidebar-mini.sidebar-collapse #menu-header {
+            display: none !important;
+        }
+
+        .navbar-lightblue20 {
+            background: #367fa9
+        }
+
+        .nav-sidebar > .nav-item .nav-icon.fas {
+            font-size: .9rem
+        }
+
+        .avatar_width {
+            width: 36px;
+            height: 36px
+        }
+
+        .catalog_cover {
+            width: 300px;
+            height: 100px
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <mini-profiler />
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand fixed-top navbar-dark navbar-lightblue">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="javascript:void(0)" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a asp-controller="Home" asp-action="Index" asp-area="" target="_blank" class="nav-link">浏览站点</a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)" role="button">
+                        <i class="fas fa-user"></i><label>@AdminModel.NickName</label><label>(@AdminModel.Account)</label>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" role="button" asp-controller="Home" asp-action="LogOut" asp-area="Admin">
+                        <i class="fas fa-power-off"></i>注销
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-lightblue sidebar-dark-bg">
+            <!-- Brand Logo -->
+            <a asp-controller="Home" asp-action="Index" asp-area="Admin" class="brand-link navbar-lightblue20">
+                <strong class="brand-image img-circle brand-mini" style="line-height:inherit; margin-top:0">BBS</strong>
+                <span class="brand-text font-weight-light brand-lg">社区后台</span>
+            </a>
+
+            <div id="menu-header" title="控制面板">
+                <i class="fa fa-desktop"></i>
+                <strong>控制面板</strong>
+            </div>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav>
+                    <ul class="nav nav-pills nav-sidebar flex-column nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                        with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-action="Index" asp-controller="Home" class="nav-link">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p>
+                                    我的首页
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Account" asp-controller="Home" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    用户管理
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Catalog" asp-controller="Home" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon fas fa-carrot"></i>
+                                <p>
+                                    话题管理
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Topic" asp-controller="Home" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon fas fa-file-alt"></i>
+                                <p>
+                                    主题管理
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Comment" asp-controller="Home" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon fas fa-comment"></i>
+                                <p>
+                                    评论管理
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Admin" asp-controller="Home" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon fas fa-tag"></i>
+                                <p>
+                                    后台账号
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Feedback" asp-controller="Home" asp-area="Admin" class="nav-link">
+                                <i class="nav-icon fas fa-reply"></i>
+                                <p>
+                                    反馈管理
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content" style="padding-top:.5rem; margin-top:57px">
+                @RenderBody()
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2019-@DateTime.Now.Year <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 3.0.4
+            </div>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery UI 1.11.4 -->
+    <script src="/adminlte3/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <script src="/adminlte3/plugins/moment/moment.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/adminlte3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="/adminlte3/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!--Layui-->
+    <script src="~/layui/layui/layui.js"></script>
+    <script src="/js/jsextesions.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/adminlte3/dist/js/adminlte.js"></script>
+    <script>
+        $(function () {
+            var flag;
+            $(".nav-sidebar li a").each(function () {
+                var href = $(this).attr("href");
+                if (window.location.pathname == href) {
+                    $(this).addClass("active");
+                    flag = true;
+                    return false;
+                }
+            });
+            if (!flag) {
+                $(".nav-sidebar li a:eq(1)").addClass("active");
+            }
+
+            layui.use('laydate', function () {
+                var laydate = layui.laydate;
+
+                $("[data-toggle=datetime]").each(function () {
+                    //常规用法
+                    laydate.render({
+                        elem: $(this).get(0)
+                    })
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+﻿@model CatalogModel
+@{
+    ViewData["Title"] = "新增话题";
+    Layout = "_ContentLayout";
+}
+<style>
+    /********图片上传css*******/
+    .upload-box {
+        position: relative;
+        display: inline-block
+    }
+
+    .upload-box .upload-trigger {
+        position: absolute;
+        height: 120px;
+        width: 300px;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        z-index: 1;
+        cursor: pointer;
+    }
+
+    .upload-box .upload-preview {
+        border: 1px solid #ddd;
+        height: 120px;
+        width: 300px;
+        background: url('/images/add.png') center no-repeat;
+        vertical-align: bottom;
+        display: block;
+    }
+</style>
+<form role="form" id="form_0" action="javascrit:void(0)" onsubmit="return doSubmit();">
+    <div class="card-body">
+        <div class="form-group">
+            <label asp-for="Title">标题</label>
+            <input asp-for="Title" type="text" class="form-control" placeholder="标题，必填" required>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">描述</label>
+            <textarea asp-for="Description" class="form-control" placeholder="描述，必填" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">封面（尺寸：300 x 120）</label>
+            <div class="input-group">
+                <div class="upload-box">
+                    <input asp-for="Cover" class="upload-value" type="hidden">
+                    <img class="upload-preview">
+                    <input class="upload-trigger" type="file" accept="image/png,image/jpg,image/jpeg,image/bmp,image/gif">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>保存</button>
+        </div>
+    </div>
+    <!-- /.card-body -->
+</form>
+<script>
+    function doSubmit() {
+        if (loading) return false;
+        loading = true;
+        $.ajax({
+             type: "post",
+             url: "/admin/home/catalogadd",
+             data: $("#form_0").serializeObject(),
+             dataType: "json",
+             success: function (res) {
+                if (res.code === 1) {
+                    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                    parent.layer.close(index);
+                } else {
+                    parent.layer.msg(res.msg);
+                }
+             },
+             complete: function () {
+                loading = false;
+             }
+         });
+        return false;
+    }
+    // 图片选择预览
+    if (window.FileReader) {
+        $(".upload-trigger").on("change", function () {
+            var $scope = $(this),
+                file = this.files[0];
+            if (file && /^image\/\w+/ig.test(file.type)) {
+                var fileReader = new FileReader();
+                fileReader.onload = function (e) {
+                    var $parent = $scope.parent();
+                    $parent.find(".upload-preview").attr("src", e.target.result);
+                    $parent.find(".upload-value").val(e.target.result);
+                    $scope.val('');
+                }
+                fileReader.readAsDataURL(file);
+            }
+        });
+    }
+
+
+</script>
+

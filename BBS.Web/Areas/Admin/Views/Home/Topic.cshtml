@@ -1,0 +1,88 @@
+﻿@model TopicListRequest
+@{
+    ViewData["Title"] = "主题管理";
+}
+<div class="card card-outline card-lightblue">
+    <div class="card-header">
+        <h3 class="card-title">主题管理</h3>
+        <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form class="form-inline" action="javascript:void(0)" id="form_0">
+            <label class="mb-2 mr-sm-2">标题</label>
+            <input asp-for="Title" type="text" class="form-control mb-2 mr-sm-2" placeholder="标题">
+            <label class="mb-2 mr-sm-2">账号ID</label>
+            <input asp-for="AccountId" type="text" class="form-control mb-2 mr-sm-2" placeholder="账号ID">
+            <label class="mb-2 mr-sm-2">话题</label>
+            <select class="form-control mb-2 mr-sm-2" asp-for="CatalogId" asp-items="Model.CustomProperties[PropertiesKey.Key_1]"></select>
+            <label class="mb-2 mr-sm-2">时间</label>
+            <input asp-for="Begin" type="text" class="form-control mb-2 mr-sm-2" placeholder="开始" data-toggle="datetime" readonly>
+            <label class="mb-2 mr-sm-2">至</label>
+            <input asp-for="End" type="text" class="form-control mb-2 mr-sm-2" placeholder="结束" data-toggle="datetime" readonly>
+
+            <button type="button" class="btn btn-primary mb-2 mr-sm-2" onclick="bbs.search()"><i class="fas fa-search"></i>查询</button>
+            <button type="reset" class="btn btn-warning mb-2 mr-sm-2"><i class="fas fa-eraser"></i>清空</button>
+        </form>
+        <table id="grid_0" class="layui-hide"></table>
+    </div>
+    <!-- /.card-body -->
+</div>
+<script>
+    var bbs = {
+        table: null,
+        refresh: function () {
+            layui.use('table', function () {
+                this.table = layui.table;
+                this.table.render({
+                    elem: '#grid_0',
+                    url: '/admin/home/topic/',
+                    request: {
+                        pageName: 'page', //页码的参数名称，默认：page
+                        limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    },
+                    autoSort: true, // false:采用服务端排序
+                    method: "post",
+                    limit: 15,
+                    where: $("#form_0").serializeObject(),
+                    limits: [10, 15, 20, 30, 40, 50, 100],
+                    cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增,
+                    id: 'id',
+                    cols: [[
+                        {
+                            field: 'title', title: '标题', templet: function (data) {
+                                return `<a href='/topic/detail/${data.id}' title='${data.title}' target='_blank'>${data.title}</a>`;
+                            }
+                        },
+                        {
+                            field: 'thumbsUpCount', title: '赞数'
+                        },
+                        {
+                            field: 'thumbsDownCount', title: '踩数'
+                        },
+                        {
+                            field: 'trailCount', title: '浏览量'
+                        },
+                        { field: 'createTime', title: '发布时间', width: 150 }
+                    ]],
+                    parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                        return {
+                            "code": res.code === 1 ? 0 : -1, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "count": res.data.total, //解析数据长度
+                            "data": res.data.list //解析数据列表
+                        };
+                    },
+                    page: true
+                });
+            })
+        },
+        search: function () {
+            this.refresh();
+        }
+    };
+    $(document).ready(function () {
+        bbs.search();
+    });
+</script>
+

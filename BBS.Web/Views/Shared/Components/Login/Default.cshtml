@@ -1,0 +1,43 @@
+﻿@model AccountModel
+@if (!UserModel.IsLogin)
+{
+    <div class="alert alert-white rounded-0">
+        <form asp-controller="Account" asp-action="Login" onsubmit="return doSubmit();" class="form-default">
+            <div class="form-group">
+                <label>账号</label>
+                <input asp-for="Account1" type="text" class="form-control rounded-0">
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input asp-for="Password" type="password" class="form-control rounded-0">
+            </div>
+            <button type="submit" class="btn btn-secondary btn-block">登录</button>
+            <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+        </form>
+    </div>
+    <script>
+    function doSubmit() {
+        var $Account1 = $("#@Html.IdFor(model=> model.Account1)"),
+            $Password = $("#@Html.IdFor(model=> model.Password)");
+        if (!/^[a-z|A-z|_]\w{3,29}$/.test($Account1.val())) {
+            layer.msg("账号格式不符合");
+            $Account1.focus();
+            return false;
+        }
+        if (!/^\w{6,20}$/.test($Password.val())) {
+            layer.msg("密码格式不符合");
+            $Password.focus();
+            return false;
+        }
+        return true;
+    }
+    </script>
+}
+else
+{
+    <div class="alert alert-info rounded-0">
+        <strong>@UserModel.NickName</strong>，欢迎回来！
+        <a asp-controller="Topic" asp-action="Publish" class="btn btn-secondary btn-block"><i class="fa fa-plus"></i>发布主题</a>
+    </div>
+}
+

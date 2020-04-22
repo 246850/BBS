@@ -1,0 +1,179 @@
+﻿@using Microsoft.Extensions.Options;
+@inject IOptionsSnapshot<SiteOptions> SiteOptions;
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewData["Title"] - @SiteOptions.Value.Title</title>
+    <meta name="keywords" content="@SiteOptions.Value.Title">
+    <meta name="description" content="@SiteOptions.Value.Title">
+    <meta name="author" content="@SiteOptions.Value.Title">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="format-detection" content="telephone=no">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">*@
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="/js/bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="~/js/jsextesions.js"></script>
+    <script src="~/layer/layer.js"></script>
+    <style>
+        .alert-white {
+            background: #fff;
+            border: 1px solid #fff
+        }
+
+        .nav-tabs .nav-link {
+            border: none
+        }
+
+            .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+                background: none;
+                border: none
+            }
+
+            .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link:hover {
+                border: none
+            }
+
+        .tt-topic-list .tt-item {
+            min-height: auto
+        }
+
+        .tt-topic-list .tt-list-header > [class^=tt-col], .tt-topic-list .tt-item {
+            padding: 0;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem
+        }
+
+        .avatar_width {
+            width: 36px;
+            height: 36px
+        }
+
+        .widget-list {
+            padding: 0;
+            list-style-position: inside
+        }
+
+            .widget-list li {
+                line-height: 2.5rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis
+            }
+    </style>
+    <script>
+        $(document).ajaxError(function (event, xhr, setting, des) {
+            if (xhr.status === 401) {
+                doLogin();
+            } else if (xhr.status === 500) {
+                layer.msg("服务异常");
+            }
+        })
+        function doLogin() {
+            window.location.href = "@Url.Action("Login", "Account")?returnUrl=" + window.location.href;   // 未授权跳转登录
+        }
+    </script>
+</head>
+<body>
+    <mini-profiler />
+    <!-- tt-mobile menu -->
+    <nav class="panel-menu" id="mobile-menu">
+        <ul>
+        </ul>
+        <div class="mm-navbtn-names">
+            <div class="mm-closebtn">
+                关闭
+                <div class="tt-icon">
+                    <svg>
+                        <use xlink:href="#icon-cancel"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="mm-backbtn">返回</div>
+        </div>
+    </nav>
+    <header id="tt-header">
+        <div class="container">
+            <div class="row tt-row no-gutters">
+                <div class="col-auto">
+                    <!-- toggle mobile menu -->
+                    <a class="toggle-mobile-menu" href="#">
+                        <i class="tt-icon fa fa-bars"></i>
+                    </a>
+                    <!-- /toggle mobile menu -->
+                    <!-- logo -->
+                    <div class="tt-logo">
+                        <a asp-controller="Home" asp-action="Index"><img src="/images/logo.png" alt="" /></a>
+                    </div>
+                    <!-- /logo -->
+                    <!-- desctop menu -->
+                    <div class="tt-desktop-menu">
+                        <nav>
+                            <ul>
+                                <li><a asp-controller="Catalog" asp-action="Index"><span>话题</span></a></li>
+                                <li><a asp-controller="Home" asp-action="About"><span>关于社区</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- /desctop menu -->
+                    <div class="tt-search">
+                        <!-- /toggle -->
+                        <form asp-controller="Home" asp-action="Index" class="search-wrapper" method="get">
+                            <div class="search-form">
+                                <input name="s" type="text" class="tt-search__input" placeholder="搜索内容" value="@ViewBag.S">
+                                <button class="tt-search__btn" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <button class="tt-search__close">
+                                    <i class="fa fa-close"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-auto ml-auto">
+                    @if (!UserModel.IsLogin)
+                    {
+                    <div class="tt-account-btn">
+                        <a asp-action="Login" asp-controller="Account" class="btn btn-primary">登录</a>
+                        <a asp-action="Register" asp-controller="Account" class="btn btn-secondary">注册</a>
+                    </div>
+                    }
+                    else
+                    {
+                    <div class="tt-user-info d-flex justify-content-center">
+                        <div class="tt-avatar-icon tt-size-md">
+                            <a href="@Url.Action("Info", "My")" title="@UserModel.NickName" class="d-flex flex-row">
+                                <img src="@UserModel.Avatar" class="avatar_width rounded-circle" />
+                                <label class="d-none d-md-block mt-1">@UserModel.NickName</label>
+                            </a>
+                        </div>
+                        <a asp-action="LogOut" asp-controller="Account" class="tt-btn-icon" title="退出">
+                            <i class="tt-icon fa fa-power-off"></i>
+                            <span class="d-none d-md-block">退出</span>
+                        </a>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+    <main id="tt-pageContent" class="tt-offset-small">
+        @RenderBody()
+    </main>
+    <a asp-controller="Topic" asp-action="Publish" class="tt-btn-create-topic">
+        <span class="tt-icon fa fa-plus-circle fa-3x"></span>
+    </a>
+
+    <footer class="border-top footer text-muted mt-3 p-3">
+        <div class="container">
+            @SiteOptions.Value.From - @DateTime.Now.Year &copy; @SiteOptions.Value.Title - <a asp-area="" asp-controller="Home" asp-action="About">关于我们</a>
+        </div>
+    </footer>
+</body>
+</html>

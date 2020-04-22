@@ -1,0 +1,53 @@
+﻿@model CatalogModel
+@{
+    ViewData["Title"] = Model.Title;
+    var topicList = ViewBag.TopicList as PagedList<TopicModel>;
+}
+<div class="container mt-3">
+    <div class="row">
+        <main class="col-12 col-lg-9">
+            <div class="tt-topic-list bg-white p-1">
+                <div class="tt-list-header font-weight-bold">
+                    <div class="tt-col-topic">主题</div>
+                    <div class="tt-col-value hide-mobile">回复</div>
+                    <div class="tt-col-value hide-mobile">浏览</div>
+                    <div class="tt-col-value">时间</div>
+                </div>
+                @foreach (var item in topicList)
+                {
+                    <div class="tt-item">
+                        <div class="tt-col-avatar">
+                            <a href="@Url.Action("Topic", "User", new { id = @item.Account.Id })" title="@item.Account.NickName">
+                                <img class="img-fluid" src="@item.Account.Avatar" alt="@item.Account.NickName" />
+                            </a>
+                        </div>
+                        <div class="tt-col-description">
+                            <h6 class="tt-title">
+                                <a href="@Url.Action("Detail", "Topic", new { Id = item.Id})" title="@item.Title">
+                                    @item.Title
+                                </a>
+                            </h6>
+                            <div class="row align-items-center no-gutters d-block d-md-none">
+                                <div class="col-1 ml-auto show-mobile">
+                                    <div class="tt-value">@item.CreateTime.ToString("MM/dd")</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tt-col-value tt-color-select hide-mobile">@item.CommentCount</div>
+                        <div class="tt-col-value hide-mobile">@item.TrailCount</div>
+                        <div class="tt-col-value hide-mobile">@item.CreateTime.ToString("MM/dd")</div>
+                    </div>
+                }
+            </div>
+
+            <nav class="mt-1">
+                @await Component.InvokeAsync("Pagination", topicList.ToPagination("List", "Catalog"))
+            </nav>
+        </main>
+        <aside class="col-lg-3 d-none d-md-block">
+            @await Component.InvokeAsync("Login")
+            @await Component.InvokeAsync("Catalog", Model)
+            @await Component.InvokeAsync("Top10NewAccount")
+        </aside>
+    </div>
+</div>

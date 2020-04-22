@@ -1,0 +1,87 @@
+﻿@model BeginEndRequest
+@{
+    ViewData["Title"] = "站点统计";
+}
+<div class="card card-outline card-lightblue">
+    <div class="card-header">
+        <h3 class="card-title">站点统计</h3>
+        <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form class="form-inline" action="javascript:void(0)" id="form_0">
+            <label class="mb-2 mr-sm-2">时间</label>
+            <input asp-for="Begin" type="text" class="form-control mb-2 mr-sm-2" value="@Model.Begin.Value.ToString("yyyy-MM-dd")" placeholder="开始" data-toggle="datetime" readonly>
+            <label class="mb-2 mr-sm-2">至</label>
+            <input asp-for="End" type="text" class="form-control mb-2 mr-sm-2" value="@Model.End.Value.ToString("yyyy-MM-dd")" placeholder="结束" data-toggle="datetime" readonly>
+            <button type="button" class="btn btn-primary mb-2 mr-sm-2" id="btn-search"><i class="fas fa-search"></i>查询</button>
+        </form>
+        <div id="charts" style="height:500px"></div>
+    </div>
+    <!-- /.card-body -->
+</div>
+<script src="/echarts/dist/echarts.min.js"></script>
+<script>
+    function doChart(data) {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('charts'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: ''
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            xAxis: {
+                data: ['站点统计']
+            },
+            legend: {
+                data: ['用户注册数', '主题发表数', '评论数']
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    max: function (value) {
+                        return (value.max + 3).toFixed(0);
+                    }
+                }
+            ],
+            series: [{
+                name: '用户注册数',
+                type: 'bar',
+                data: [data.userCount]
+            }, {
+                name: '主题发表数',
+                type: 'bar',
+                data: [data.topicCount]
+            }, {
+                name: '评论数',
+                type: 'bar',
+                data: [data.commentCount]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        window.onresize = function () {
+            myChart.resize();
+        }
+    }
+    $(function () {
+        $("#btn-search").on("click", function () {
+            $.post("/admin/home/index", $("#form_0").serializeObject(), function (res) {
+                if (res.code === 1) {
+                    doChart(res.data);
+                } else {
+                    parent.layer.msg(res.msg);
+                }
+            })
+        }).trigger("click");
+
+    })
+</script>

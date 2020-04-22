@@ -1,0 +1,37 @@
+﻿@model PagedList<TopicModel>
+
+<div class="tt-topic-list">
+    <div class="tt-list-header font-weight-bold">
+        <div class="tt-col-topic">主题</div>
+        <div class="tt-col-category">话题</div>
+        <div class="tt-col-value hide-mobile">回复</div>
+        <div class="tt-col-value hide-mobile">浏览</div>
+        <div class="tt-col-value">发布时间</div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="tt-item">
+            <div class="tt-col-description">
+                <h6 class="tt-title">
+                    <a href="@Url.Action("Detail", "Topic", new { Id = item.Id })" title="@item.Title">
+                        @item.Title
+                    </a>
+                </h6>
+                <div class="row align-items-center no-gutters d-block d-md-none">
+                    <div class="col-11">
+                        <ul class="tt-list-badge">
+                            <li class="show-mobile"><a href="@Url.Action("List", "Catalog", new { id = item.Catalog.Id})" title="@item.Catalog.Title"><span class="tt-badge badge badge-secondary">@item.Catalog.Title</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-1 ml-auto show-mobile">
+                        <div class="tt-value">@item.CreateTime.ToString("MM/dd")</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tt-col-category"><a href="@Url.Action("List", "Catalog", new { id = item.Catalog.Id})" title="@item.Catalog.Title"><span class="tt-badge badge badge-secondary">@item.Catalog.Title</span></a></div>
+            <div class="tt-col-value tt-color-select hide-mobile">@item.CommentCount</div>
+            <div class="tt-col-value hide-mobile">@item.TrailCount</div>
+            <div class="tt-col-value hide-mobile">@item.CreateTime.ToString("MM/dd")</div>
+        </div>
+    }
+</div>

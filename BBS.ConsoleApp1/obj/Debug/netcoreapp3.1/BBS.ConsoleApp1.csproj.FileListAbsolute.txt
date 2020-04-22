@@ -1,0 +1,11 @@
+E:\DEMO_SPACES\BBS\BBS.ConsoleApp1\bin\Debug\netcoreapp3.1\BBS.ConsoleApp1.exe
+E:\DEMO_SPACES\BBS\BBS.ConsoleApp1\bin\Debug\netcoreapp3.1\BBS.ConsoleApp1.deps.json
+E:\DEMO_SPACES\BBS\BBS.ConsoleApp1\bin\Debug\netcoreapp3.1\BBS.ConsoleApp1.runtimeconfig.json
+E:\DEMO_SPACES\BBS\BBS.ConsoleApp1\bin\Debug\netcoreapp3.1\BBS.ConsoleApp1.runtimeconfig.dev.json
+E:\DEMO_SPACES\BBS\BBS.ConsoleApp1\bin\Debug\netcoreapp3.1\BBS.ConsoleApp1.dll
+E:\DEMO_SPACES\BBS\BBS.ConsoleApp1\bin\Debug\netcoreapp3.1\BBS.ConsoleApp1.pdb
+E:\DEMO_SPACES\BBS\BBS.ConsoleApp1\obj\Debug\netcoreapp3.1\BBS.ConsoleApp1.csprojAssemblyReference.cache
+E:\DEMO_SPACES\BBS\BBS.ConsoleApp1\obj\Debug\netcoreapp3.1\BBS.ConsoleApp1.AssemblyInfoInputs.cache
+E:\DEMO_SPACES\BBS\BBS.ConsoleApp1\obj\Debug\netcoreapp3.1\BBS.ConsoleApp1.AssemblyInfo.cs
+E:\DEMO_SPACES\BBS\BBS.ConsoleApp1\obj\Debug\netcoreapp3.1\BBS.ConsoleApp1.dll
+E:\DEMO_SPACES\BBS\BBS.ConsoleApp1\obj\Debug\netcoreapp3.1\BBS.ConsoleApp1.pdb

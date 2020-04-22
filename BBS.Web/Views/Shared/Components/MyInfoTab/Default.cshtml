@@ -1,0 +1,41 @@
+﻿<style>
+    .tt-tab-wrapper .nav-tabs{border-bottom:none}
+</style>
+<div class="tt-wrapper-inner">
+    <ul class="nav nav-tabs pt-tabs-default">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Info", "My")"><span>我的资料</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Topic", "My")"><span>我的主题</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Follow", "My")"><span>我的关注</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Fans", "My")"><span>我的粉丝</span></a>
+        </li>
+        <li class="nav-item tt-hide-xs">
+            <a class="nav-link" href="@Url.Action("Favorite", "My")"><span>我的收藏</span></a>
+        </li>
+        <li class="nav-item tt-hide-md">
+            <a class="nav-link" href="@Url.Action("Comment", "My")"><span>我的评论</span></a>
+        </li>
+        <li class="nav-item tt-hide-md">
+            <a class="nav-link" href="@Url.Action("ThumbsUp", "My")"><span>我的点赞</span></a>
+        </li>
+        <li class="nav-item tt-hide-md">
+            <a class="nav-link" href="@Url.Action("ThumbsDown", "My")"><span>我的点踩</span></a>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".nav-link").each(function () {
+            var href = $(this).attr("href");
+            if (window.location.href.indexOf(href) != -1) {
+                $(this).addClass("active");
+            }
+        });
+    })
+</script>

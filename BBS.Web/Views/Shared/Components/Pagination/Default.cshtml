@@ -1,0 +1,80 @@
+﻿@model PaginationModel
+@if (Model != null)
+{
+    <ul class="pagination">
+        @{
+            int start = Model.Page - 5;
+            if (start < 1)
+            {
+                start = 1;
+            }
+            long end = start + 10;
+            if (end > Model.PageCount)
+            {
+                end = Model.PageCount;
+            }
+            if (start < end)
+            {
+                if (Model.Page <= 1)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link rounded-0" href="javascript:void(0)">首页</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link rounded-0" href="javascript:void(0)">上页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link rounded-0" href="@Url.Action(Model.Action, Model.Controller, new { page = 1})@Model.QueryString">首页</a>
+                    </li>
+                    <li class="page-item"><a class="page-link rounded-0" href="@Url.Action(Model.Action, Model.Controller, new {page = Model.Prev})@Model.QueryString">上页</a></li>
+                }
+
+                for (int i = start; i <= end; i++)
+                {
+                    var activeClass = i == Model.Page ? "active" : string.Empty;
+                    <li class="page-item d-none d-md-block @activeClass"><a id="__page_@i" class="page-link rounded-0" href="@Url.Action(Model.Action, Model.Controller, new {page = i})@Model.QueryString">@i</a></li>
+                }
+                <li class="page-item d-block d-md-none">
+                    <select class="form-control rounded-0" onchange="doPageChange(this)">
+                        @for (int i = start; i <= end; i++)
+                        {
+                            if (i == Model.Page)
+                            {
+                                <option value="@i" selected>@string.Format("第{0}页", i)</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@string.Format("第{0}页", i)</option>
+                            }
+                        }
+                    </select>
+                </li>
+                if (Model.Page >= Model.PageCount)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link rounded-0" href="javascript:void(0)">下页</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link rounded-0" href="javascript:void(0)">末页</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link rounded-0" href="@Url.Action(Model.Action, Model.Controller, new {page = Model.Next})@Model.QueryString">下页</a></li>
+                    <li class="page-item">
+                        <a class="page-link rounded-0" href="@Url.Action(Model.Action, Model.Controller, new { page = Model.PageCount})@Model.QueryString">末页</a>
+                    </li>
+                }
+            }
+        }
+    </ul>
+    <script type="text/javascript">
+        function doPageChange(element) {
+            $('#__page_' + $(element).val()).get(0).click();
+        }
+    </script>
+}
+

@@ -1,0 +1,21 @@
+﻿@model AccountModel
+<div class="tt-wrapper-section">
+    <div class="container">
+        <div class="tt-user-header">
+            <div class="tt-col-avatar">
+                <div class="tt-icon">
+                    <img class="img-fluid" src="@Model.Avatar" alt="@Model.NickName" />
+                </div>
+            </div>
+            <div class="tt-col-title">
+                <div class="tt-title">
+                    <a href="javascript:void(0)">@Model.NickName</a>
+                </div>
+                <ul class="tt-list-badge">
+                    <li><a href="#"><span class="tt-color11 tt-badge">积分 : @Model.Integral</span></a></li>
+                    <li><small>加入于：@Model.CreateTime.ToString("yyyy/MM/dd HH:mm")</small></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

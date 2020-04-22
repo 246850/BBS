@@ -1,0 +1,8 @@
+E:\DEMO_SPACES\BBS\BBS.Framework\bin\Release\netcoreapp3.1\BBS.Framework.deps.json
+E:\DEMO_SPACES\BBS\BBS.Framework\bin\Release\netcoreapp3.1\BBS.Framework.dll
+E:\DEMO_SPACES\BBS\BBS.Framework\bin\Release\netcoreapp3.1\BBS.Framework.pdb
+E:\DEMO_SPACES\BBS\BBS.Framework\obj\Release\netcoreapp3.1\BBS.Framework.csprojAssemblyReference.cache
+E:\DEMO_SPACES\BBS\BBS.Framework\obj\Release\netcoreapp3.1\BBS.Framework.AssemblyInfoInputs.cache
+E:\DEMO_SPACES\BBS\BBS.Framework\obj\Release\netcoreapp3.1\BBS.Framework.AssemblyInfo.cs
+E:\DEMO_SPACES\BBS\BBS.Framework\obj\Release\netcoreapp3.1\BBS.Framework.dll
+E:\DEMO_SPACES\BBS\BBS.Framework\obj\Release\netcoreapp3.1\BBS.Framework.pdb

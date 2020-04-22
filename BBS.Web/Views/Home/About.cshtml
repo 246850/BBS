@@ -1,0 +1,80 @@
+﻿@model FeedbackModel
+@{
+    ViewData["Title"] = "关于社区";
+}
+<div class="container">
+    <div class="tt-tab-wrapper">
+        <div class="tt-wrapper-inner">
+            <ul class="nav nav-tabs pt-tabs-default" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link show active" data-toggle="tab" href="#tt-tab-01" role="tab" aria-selected="true"><span>反馈建议</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tt-tab-02" role="tab" aria-selected="false"><span>关于社区</span></a>
+                </li>
+                <li class="nav-item tt-hide-md">
+                    <a class="nav-link" data-toggle="tab" href="#tt-tab-03" role="tab" aria-selected="false"><span>联系我们</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade active show" id="tt-tab-01" role="tabpanel">
+                <div class="tt-wrapper-inner tt-layout-tab">
+                    <form asp-controller="Home" asp-action="Feedback" onsubmit="return doSubmit();" class="form-default">
+                        <div class="form-group">
+                            <label>您的名字</label>
+                            <input asp-for="Name" type="text" class="form-control rounded-0" placeholder="如:张三">
+                        </div>
+                        <div class="form-group">
+                            <label>联系方式</label>
+                            <input asp-for="Contact" type="text" class="form-control rounded-0" placeholder="手机号、微信号、QQ号、邮箱任一即可">
+                        </div>
+                        <div class="form-group">
+                            <label>反馈内容</label>
+                            <textarea asp-for="Contents" class="form-control rounded-0" rows="5" placeholder="此处输入内容"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">提交</button>
+                        <small id="emailHelp" class="form-text text-muted">注：本站不会泄露用户个人隐私信息</small>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-pane" id="tt-tab-02" role="tabpanel">
+                <div class="tt-wrapper-inner tt-layout-tab">
+                    <p>致力于简洁，友好，轻量级社区论坛。</p>
+                </div>
+            </div>
+            <div class="tab-pane" id="tt-tab-03" role="tabpanel">
+                <div class="tt-wrapper-inner tt-layout-tab">
+                    <ol>
+                        <li>联系电话：15002122201(微信同号)</li>
+                        <li>QQ：390915549</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function doSubmit() {
+        var $Name = $("#@Html.IdFor(model=> model.Name)"),
+            $Contact = $("#@Html.IdFor(model=> model.Contact)"),
+            $Contents = $("#@Html.IdFor(model=> model.Contents)");
+        if ($Name.val().isEmpty()) {
+            layer.msg("名字不能为空");
+            $Name.focus();
+            return false;
+        }
+        if ($Contact.val().isEmpty()) {
+            layer.msg("联系方式不能为空");
+            $Contact.focus();
+            return false;
+        }
+        if ($Contents.val().isEmpty()) {
+            layer.msg("反馈内容不能为空");
+            $Contents.focus();
+            return false;
+        }
+        return true;
+    }
+</script>

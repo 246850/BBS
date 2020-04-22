@@ -1,0 +1,41 @@
+﻿@model AccountModel
+@{
+    ViewData["Title"] = "我的资料";
+}
+@await Component.InvokeAsync("MyInfo", Model)
+<div class="container">
+    <div class="tt-tab-wrapper">
+        @await Component.InvokeAsync("MyInfoTab")
+        <div class="tab-content pt-3 pb-3 alert-white">
+            <div class="tab-pane tt-indent-none show active" role="tabpanel">
+                <div class="tt-wrapper-inner tt-layout-tab">
+                    <form onsubmit="return doSubmit();" class="form-default" asp-action="Update" asp-controller="My" method="post">
+                        <div class="form-group">
+                            <label>账号</label>
+                            <input asp-for="Account1" type="text" class="form-control rounded-0" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label>昵称</label>
+                            <input asp-for="NickName" type="text" class="form-control rounded-0">
+                        </div>
+                        @Html.HiddenFor(model => model.Id)
+                        <button type="submit" class="btn btn-secondary">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function doSubmit(){
+        var $NickName = $("#@Html.IdFor(model=> model.NickName)");
+        if ($NickName.val().isEmpty() || getStringLength($NickName.val()) < 2 || getStringLength($NickName.val()) > 16) {
+            layer.msg("昵称格式不符合");
+            $NickName.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+

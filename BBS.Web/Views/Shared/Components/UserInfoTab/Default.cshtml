@@ -1,0 +1,29 @@
+﻿@model int
+<style>
+    .tt-tab-wrapper .nav-tabs {
+        border-bottom: none
+    }
+</style>
+<div class="tt-wrapper-inner">
+    <ul class="nav nav-tabs pt-tabs-default">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Topic", "User", new { id = Model})"><span>TA的主题</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Follow", "User", new { id = Model})"><span>TA的关注</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Fans", "User", new { id = Model})"><span>TA的粉丝</span></a>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".nav-link").each(function () {
+            var href = $(this).attr("href");
+            if (window.location.href.indexOf(href) != -1) {
+                $(this).addClass("active");
+            }
+        });
+    })
+</script>

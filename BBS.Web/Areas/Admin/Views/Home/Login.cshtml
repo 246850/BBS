@@ -1,0 +1,50 @@
+﻿@model AdminModel
+@{ 
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>登录 - 社区后台</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://v4.bootcss.com/docs/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @@media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="~/css/adminsignin.css" rel="stylesheet" />
+</head>
+<body class="text-center">
+    <form class="form-signin" asp-controller="Home" asp-action="Login" asp-area="Admin">
+        <img class="mb-4" src="~/images/logo.png" alt="" width="72" height="72">
+        <label asp-for="Account" class="sr-only">账号</label>
+        <input asp-for="Account" type="text" class="form-control" placeholder="账号" required autofocus>
+        <label asp-for="Password" class="sr-only">密码</label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="密码" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <label class="text-danger">
+            @Html.ValidationSummary()
+        </label>
+        <p class="mt-5 mb-3 text-muted">&copy; 2019-@DateTime.Now.Year</p>
+    </form>
+</body>
+</html>

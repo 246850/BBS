@@ -1,0 +1,70 @@
+﻿{
+   "ContextClassName": "BBSDbContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "DoNotCombineNamespace": false,
+   "IdReplace": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": null,
+   "ProjectRootNamespace": "BBS.Domain",
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "HasPrimaryKey": true,
+         "Name": "account"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "admin"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "catalog"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "comment"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "favorite"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "feedback"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "follow"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "tag"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "thumbs_up"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "topic"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "topic_tag"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "trail"
+      }
+   ],
+   "UseDatabaseNames": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseSpatial": false
+}

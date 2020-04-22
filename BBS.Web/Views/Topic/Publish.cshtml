@@ -1,0 +1,82 @@
+﻿@model TopicModel
+@{
+    ViewData["Title"] = "发表主题";
+}
+<style>
+    .form-default .form-control {
+        background-color: white;
+        border-radius: 0;
+        font-family: inherit
+    }
+</style>
+<div class="container mt-3">
+    <div class="tt-wrapper-inner">
+        <h1 class="tt-title-border">
+            发表主题
+        </h1>
+        <form class="form-default form-create-topic" asp-controller="Topic" asp-action="Publish">
+            <div class="form-group">
+                <label for="inputTopicTitle">标题<span class="text-danger">*</span></label>
+                <div class="tt-value-wrapper">
+                    <input asp-for="Title" type="text" class="form-control forbidden-kongge" placeholder="标题必填，30个汉字长度">
+                </div>
+                <small class="tt-note">注：简要概况内容主题，应精简易懂!</small>
+            </div>
+            <div class="pt-editor pt-0">
+                <h6 class="pt-title">内容<span class="text-danger">*</span></h6>
+                <div class="form-group">
+                    <textarea asp-for="Contents" placeholder="编辑内容"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="inputTopicTitle">话题<span class="text-danger">*</span></label>
+                            <select asp-for="CatalogId" asp-items="Model.CustomProperties[PropertiesKey.Key_1]" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="inputTopicTags">标签1</label>
+                            <input type="text" name="TagList[0].TagName" class="form-control forbidden-kongge" placeholder="标签可选，限8个汉字长度">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="inputTopicTags">标签2</label>
+                            <input type="text" name="TagList[1].TagName" class="form-control forbidden-kongge" placeholder="标签可选，限8个汉字长度">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-auto ml-md-auto">
+                        <button type="submit" class="btn btn-secondary btn-width-lg">发表</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/ueditor-utf8/ueditor.config.js"></script>
+<script src="~/ueditor-utf8/ueditor.all.min.js"></script>
+<script src="~/ueditor-utf8/lang/zh-cn/zh-cn.js"></script>
+<script>
+    var ue = UE.getEditor('@Html.IdFor(model=> model.Contents)', {
+        initialFrameWidth: "100%",
+        initialFrameHeight: 300,
+        toolbars: [[
+            'fullscreen', 'source', '|', 'undo', 'redo', '|',
+            'bold', 'italic', 'blockquote', 'underline', 'strikethrough', 'insertimage', 'link', 'unlink', 'horizontal', 'insertorderedlist', 'insertunorderedlist', 'paragraph', '|', 'forecolor', 'backcolor', '|','indent', '|',
+            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', '|',
+            'emotion', 'scrawl', 'insertcode', '|', 'template', 'spechars', 'anchor', 'superscript', 'subscript', 'selectall', 'cleardoc', 'removeformat', 'formatmatch', 'pasteplain', 'searchreplace', 'drafts', 'preview', 'help'
+        ]]
+    });
+
+    $(function () {
+        $(".forbidden-kongge").on("keydown", function (e) {
+            if (e.keyCode == 32) return false;
+        })
+    })
+</script>
+

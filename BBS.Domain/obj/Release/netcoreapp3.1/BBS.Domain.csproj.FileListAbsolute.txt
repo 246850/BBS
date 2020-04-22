@@ -1,0 +1,10 @@
+E:\DEMO_SPACES\BBS\BBS.Domain\bin\Release\netcoreapp3.1\BBS.Domain.deps.json
+E:\DEMO_SPACES\BBS\BBS.Domain\bin\Release\netcoreapp3.1\BBS.Domain.runtimeconfig.json
+E:\DEMO_SPACES\BBS\BBS.Domain\bin\Release\netcoreapp3.1\BBS.Domain.runtimeconfig.dev.json
+E:\DEMO_SPACES\BBS\BBS.Domain\bin\Release\netcoreapp3.1\BBS.Domain.dll
+E:\DEMO_SPACES\BBS\BBS.Domain\bin\Release\netcoreapp3.1\BBS.Domain.pdb
+E:\DEMO_SPACES\BBS\BBS.Domain\obj\Release\netcoreapp3.1\BBS.Domain.csprojAssemblyReference.cache
+E:\DEMO_SPACES\BBS\BBS.Domain\obj\Release\netcoreapp3.1\BBS.Domain.AssemblyInfoInputs.cache
+E:\DEMO_SPACES\BBS\BBS.Domain\obj\Release\netcoreapp3.1\BBS.Domain.AssemblyInfo.cs
+E:\DEMO_SPACES\BBS\BBS.Domain\obj\Release\netcoreapp3.1\BBS.Domain.dll
+E:\DEMO_SPACES\BBS\BBS.Domain\obj\Release\netcoreapp3.1\BBS.Domain.pdb

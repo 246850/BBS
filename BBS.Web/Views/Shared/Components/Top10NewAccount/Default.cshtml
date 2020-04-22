@@ -1,0 +1,17 @@
+﻿@model List<AccountModel>
+
+<div class="alert alert-white rounded-0">
+    <h6 class="text-dark">
+        最新加入用户
+        <a href="https://wenda.tipask.com/top/articles" title="更多">»</a>
+    </h6>
+    <ol class="widget-list">
+        @foreach(var item in Model)
+        {
+            <li>
+                <img class="avatar_width rounded-circle" src="@item.Avatar" title="@item.NickName">
+                <a href="@Url.Action("Topic", "User", new { id = item.Id})" title="@item.NickName">@item.NickName</a>
+            </li>
+        }
+    </ol>
+</div>

@@ -1,0 +1,279 @@
+﻿@model TopicModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+<style>
+    .tt-single-topic .tt-avatar-icon {
+        width: 64px;
+        height: 64px;
+        overflow: hidden
+    }
+
+    .word-break {
+        white-space: pre-wrap
+    }
+
+    .thumbs-active {
+        color: red
+    }
+</style>
+<div class="container mt-3">
+    <div class="row">
+        <main class="col-12 col-lg-9">
+            <div class="tt-single-topic-list">
+                <div class="tt-item">
+                    <div class="tt-single-topic pt-1 pb-1">
+                        <div class="tt-item-header">
+                            <div class="tt-item-info info-top">
+                                <div class="tt-avatar-icon rounded-circle">
+                                    <a href="@Url.Action("Topic", "User", new { id = Model.Account.Id })" title="@Model.Account.NickName">
+                                        <img class="img-fluid" src="@Model.Account.Avatar" alt="@Model.Account.NickName" />
+                                    </a>
+                                </div>
+                                <div class="tt-avatar-title">
+                                    <a href="@Url.Action("Topic", "User", new { id = Model.Account.Id })" title="@Model.Account.NickName">@Model.Account.NickName</a>
+                                </div>
+                                <a href="javascript:void(0)" class="tt-info-time">
+                                    @Model.CreateTime.ToString("yyyy.MM.dd HH:mm")
+                                </a>
+                            </div>
+                            <h3 class="tt-item-title">
+                                <a href="@Url.Action("Detail", "Topic", new { Id = Model.Id})" title="@Model.Title">@Model.Title</a>
+                            </h3>
+                            <div class="tt-item-tag">
+                                <ul class="tt-list-badge">
+                                    <li><a href="@Url.Action("List", "Catalog", new { id = Model.Catalog.Id})" title="@Model.Catalog.Title"><span class="tt-color03 tt-badge">@Model.Catalog.Title</span></a></li>
+                                    @if (Model.TagList != null && Model.TagList.Count > 0)
+                                    {
+                                        foreach (var item in Model.TagList)
+                                        {
+                                            <li><a href="#"><span class="tt-badge">@item.TagName</span></a></li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tt-item-description">
+                            @Html.Raw(Model.Contents)
+                        </div>
+                        <div class="card text-center border-0 rounded-0">
+                            <div class="card-body p-0">
+                                <button type="button" class="btn btn-info rounded-0" onclick="doTopicThumbsUp(@Model.Id, true, this)"><i class="fa fa-thumbs-up@(Model.IsThumbsUp ? " thumbs-active" : string.Empty)"></i>赞(<span>@Model.ThumbsUpCount</span>)</button>
+                                <button type="button" class="btn btn-primary rounded-0" onclick="doTopicThumbsUp(@Model.Id, false, this)"><i class="fa fa-thumbs-down@(Model.IsThumbsDown ? " thumbs-active" : string.Empty)"></i>踩(<span>@Model.ThumbsDownCount</span>)</button>
+                                <button type="button" class="btn btn-warning rounded-0">浏览(<span>@(Model.TrailCount + 1)</span>)</button>
+                                @if (Model.IsFavorite)
+                                {
+                                    <button type="button" class="btn btn-secondary rounded-0">已收藏</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-secondary rounded-0" onclick="doFavorite(@Model.Id, this)">收藏</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info rounded-0 mb-0 mt-3" id="comments">
+                    <strong>主题评论(<span id="comments-count">@Model.CommentList.Total</span>)</strong>
+                </div>
+                @if (Model.CommentList != null && Model.CommentList.Count > 0)
+                {
+                    for (var i = 0; i < Model.CommentList.Count; i++)
+                    {
+                        var item = Model.CommentList[i];
+                        <div class="tt-item mt-1 comment-item">
+                            <div class="tt-single-topic pt-1 pb-1">
+                                <div class="tt-item-header pt-noborder">
+                                    <div class="tt-item-info info-top">
+                                        <div class="tt-avatar-icon rounded-circle">
+                                            <a href="@Url.Action("Topic", "User", new { id = item.Account.Id })" title="@item.Account.NickName">
+                                                <img class="img-fluid" src="@item.Account.Avatar" alt="@item.Account.NickName" />
+                                            </a>
+                                        </div>
+                                        <div class="tt-avatar-title">
+                                            <a href="@Url.Action("Topic", "User", new { id = item.Account.Id })" title="@item.Account.NickName">@item.Account.NickName</a>
+                                        </div>
+                                        <a href="javascript:void(0)" class="tt-info-time">
+                                            @item.CreateTime.ToString("yyyy.MM.dd HH:mm")
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="tt-item-description">
+                                    @if (item.QuoteAccount != null)
+                                    {
+                                        <a href="@Url.Action("Topic", "User", new { id = item.QuoteAccount.Id })" title="@item.QuoteAccount.NickName">@@@item.QuoteAccount.NickName</a>
+                                    }
+                                    <pre class="word-break">@item.Contents</pre>
+                                </div>
+                                <div class="tt-item-info info-bottom">
+                                    <span class="tt-icon-btn">#@(Model.CommentList.RowNumber + i)楼</span>
+                                    <span class="tt-icon-btn" onclick="doCommentThumbsUp(@item.Id, true, this)" style="cursor:pointer">
+                                        <i class="fa fa-thumbs-up@(item.IsThumbsUp ? " thumbs-active" : string.Empty)"></i>
+                                        <span>@item.ThumbsUpCount</span>
+                                    </span>
+                                    <span class="tt-icon-btn" onclick="doCommentThumbsUp(@item.Id, false, this)" style="cursor:pointer">
+                                        <i class="fa fa-thumbs-down@(item.IsThumbsDown ? " thumbs-active" : string.Empty)"></i>
+                                        <span>@item.ThumbsDownCount</span>
+                                    </span>
+                                    <span class="tt-icon-btn" onclick="doQuote(@item.Account.Id, '@item.Account.NickName')" style="cursor:pointer">
+                                        回复
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <nav class="mt-1">
+                @await Component.InvokeAsync("Pagination", Model.CommentList.ToPagination("Detail", "Topic"))
+            </nav>
+            <div class="tt-wrapper-inner ml-0 mr-0">
+                <div class="pt-editor form-default">
+                    <form action="javascript:void(0)" id="form_0">
+                        <h6 class="pt-title">发表评论：<small id="quoteName" class="text-primary"></small></h6>
+                        <div class="form-group">
+                            <input type="hidden" name="QuoteAccountId" id="QuoteAccountId" value="0" />
+                            <input type="hidden" name="TopicId" id="TopicId" value="@Model.Id" />
+                            <textarea name="Contents" id="Contents" class="form-control rounded-0" rows="5" placeholder="@(UserModel.IsLogin ? "点击输入内容":"登录后发表评论")"></textarea>
+                        </div>
+                        <div class="pt-row">
+                            <div class="col-auto">
+                                <select id="tmpls" class="form-control">
+                                    <option value="">快捷回复</option>
+                                    <option value="老鼠晓得打蛋谷！">老鼠晓得打蛋谷！</option>
+                                    <option value="天天打摆子！">天天打摆子！</option>
+                                    <option value="车子一滚，票子一捆！">车子一滚，票子一捆！</option>
+                                    <option value="678910！">678910！</option>
+                                    <option value="天天打摆子！">天天打摆子！</option>
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                @if (UserModel.IsLogin)
+                                {
+                                    <button type="button" class="btn btn-secondary btn-width-lg" onclick="doComment(event)">发表</button>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Login", "Account")" class="btn btn-secondary btn-width-lg">登录</a>
+                                }
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <aside class="col-lg-3 d-none d-md-block">
+            @await Component.InvokeAsync("Login")
+            @await Component.InvokeAsync("Catalog", Model.Catalog)
+        </aside>
+    </div>
+</div>
+<script type="text/javascript">
+    var loading = false;
+    function doTopicThumbsUp(itemId, isThumb, element) {
+        if (loading) return;
+        loading = true;
+
+        $.post("@Url.Action("ThumbsUp", "Topic")", { ItemId: itemId, IsThumb: isThumb }, function (data) {
+            loading = false;
+            if (data.code === 1) {
+                var $count = $(element).find("span");
+                var current = Number($count.html()) || 0;
+
+                // 添加/移除 active 样式
+                var $icon = $(element).find("i");
+                if ($icon.hasClass("thumbs-active")) {
+                    $icon.removeClass("thumbs-active");
+                    $count.html(--current); // 取消赞
+                } else {
+                    $icon.addClass("thumbs-active");
+                    $count.html(++current); // 点赞
+                }
+            }
+        });
+    }
+
+    function doFavorite(itemId, element) {
+        if ($(element).text() === "已收藏") {
+            return;
+        }
+        $(element).text("已收藏");
+        $.post("@Url.Action("Favorite", "Topic")", { ItemId:itemId }, function (data) {
+            layer.msg(data.msg);
+        });
+    }
+
+    function doCommentThumbsUp(itemId, isThumb, element) {
+        if (loading) return;
+        loading = true;
+
+        $.post("@Url.Action("ThumbsUp", "Comment")", { ItemId: itemId, IsThumb: isThumb }, function (data) {
+            loading = false;
+            if (data.code === 1) {
+                var $count = $(element).find("span");
+                var current = Number($count.html()) || 0;
+
+                // 添加/移除 active 样式
+                var $icon = $(element).find("i");
+                if ($icon.hasClass("thumbs-active")) {
+                    $icon.removeClass("thumbs-active");
+                    $count.html(--current); // 取消赞
+                } else {
+                    $icon.addClass("thumbs-active");
+                    $count.html(++current); // 点赞
+                }
+            }
+        });
+    }
+
+    function doQuote(accountId, nickName) {
+        $("#QuoteAccountId").val(accountId);
+        $("#quoteName").html("@@"+nickName);
+        var oldUrl = window.location.href.split("#")[0];
+        window.location = oldUrl + "#quoteName";
+        $("#Contents").focus();
+    }
+
+    function doComment(event) {
+        if (loading) return;
+
+        var $contents = $("#Contents");
+        if ($contents.val().isEmpty()) {
+            layer.msg("评论内容不能为空");
+            $contents.val('');
+            $contents.focus();
+            return false;
+        }
+        loading = true;
+        $.post("@Url.Action("Publish", "Comment")", $("#form_0").serializeObject(), function (data, status, xml) {
+            loading = false;
+            if (data.code === 1) {
+                var tmpl = `<div class="tt-item tt-wrapper-success mt-1 comment-item">
+                                <div class="tt-single-topic pt-1 pb-1">
+                                    <div class="tt-item-header pt-noborder">
+                                        <strong>我的评论：</strong>
+                                    </div>
+                                    <div class="tt-item-description">
+                                        <pre class="word-break">${$contents.val()}</pre>
+                                    </div>
+                                </div>
+                            </div>`;
+                var $after = $(".comment-item:last").length > 0 ? $(".comment-item:last") : $("#comments");
+                $after.after(tmpl);
+                var $count = $("#comments-count");
+                var current = Number($count.html()) || 0;
+                $count.html(++current);
+
+                $contents.val('');
+            }
+        })
+    }
+
+    $(function () {
+        $("#tmpls").on("change", function () {
+            var old = $("#Contents").val() || "";
+            $("#Contents").val(old + $(this).val());
+        })
+    });
+</script>
+

@@ -1,0 +1,50 @@
+﻿@model AdminModel
+@{
+    ViewData["Title"] = "新增账号";
+    Layout = "_ContentLayout";
+}
+<form role="form" id="form_0" action="javascrit:void(0)" onsubmit="return doSubmit();">
+    <div class="card-body">
+        <div class="form-group">
+            <label asp-for="Account">账号</label>
+            <input asp-for="Account" type="text" class="form-control" placeholder="账号，必填" required>
+        </div>
+        <div class="form-group">
+            <label asp-for="NickName">昵称</label>
+            <input asp-for="NickName" type="text" class="form-control" placeholder="昵称，必填" required>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">密码</label>
+            <input asp-for="Password" type="password" class="form-control" placeholder="密码，必填" required />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>保存</button>
+        </div>
+    </div>
+    <!-- /.card-body -->
+</form>
+<script>
+    function doSubmit() {
+        if (loading) return false;
+        loading = true;
+        $.ajax({
+             type: "post",
+             url: "/admin/home/adminadd",
+             data: $("#form_0").serializeObject(),
+             dataType: "json",
+             success: function (res) {
+                if (res.code === 1) {
+                    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                    parent.layer.close(index);
+                } else {
+                    parent.layer.msg(res.msg);
+                }
+             },
+             complete: function () {
+                loading = false;
+             }
+         });
+        return false;
+    }
+</script>
+

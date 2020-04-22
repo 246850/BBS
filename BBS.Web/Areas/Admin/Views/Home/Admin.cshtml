@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewData["Title"] = "后台账号";
+}
+<style>
+    .layui-table-cell {
+        height: auto;
+    }
+</style>
+<div class="card card-outline card-lightblue">
+    <div class="card-header">
+        <h3 class="card-title">后台账号</h3>
+        <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <button type="button" class="btn btn-success mb-2" onclick="bbs.add()"><i class="fas fa-plus"></i>新增</button>
+        <table id="grid_0" class="layui-hide"></table>
+    </div>
+    <!-- /.card-body -->
+</div>
+<script>
+    var bbs = {
+        refresh: function () {
+            layui.use('table', function () {
+                this.table = layui.table;
+                this.table.render({
+                    elem: '#grid_0',
+                    url: '/admin/home/admin/',
+                    request: {
+                        pageName: 'page', //页码的参数名称，默认：page
+                        limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    },
+                    method: "post",
+                    limit: 20,
+                    limits: [10, 20, 30, 40, 50, 100],
+                    cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增,
+                    id: 'id',
+                    cols: [[
+                        { field: 'account', title: '账号' },
+                        { field: 'nickName', title: '昵称' },
+                        { field: 'createTime', title: '创建时间' },
+                        {
+                            field: 'id', title: '操作', width: 100, fixed: 'right', templet: function (data) {
+                                return `<button type='button' class='btn btn-danger btn-sm' onclick='bbs.delete(${data.id})'><i class='fas fa-trash'></i>删除</button>`;
+                            }
+                        }
+                    ]],
+                    parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                        return {
+                            "code": res.code === 1 ? 0 : -1, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "count": res.data.total, //解析数据长度
+                            "data": res.data.list //解析数据列表
+                        };
+                    },
+                    page: true
+                });
+            });
+        },
+        search: function () {
+            this.refresh();
+        },
+        add: function () {
+            layer.open({
+                type: 2,
+                title: '新增账号',
+                shadeClose: true,
+                shade: 0.7,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['70%', '60%'],
+                content: '/admin/home/adminadd',
+                end: function () {
+                    bbs.search();
+                }
+            });
+        },
+        delete: function (id) {
+            $.post("/admin/home/admindelete?id=" + id, function (res) {
+                if (res.code === 1) {
+                    bbs.refresh();
+                } else {
+                    layer.msg(res.msg);
+                };
+            })
+        }
+    };
+    $(document).ready(function () {
+        bbs.search();
+    });
+</script>

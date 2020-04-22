@@ -1,0 +1,39 @@
+﻿@model PagedList<TopicModel>
+@{
+    ViewData["Title"] = "我的收藏";
+}
+
+@await Component.InvokeAsync("MyInfo")
+<div class="container">
+    <div class="tt-tab-wrapper">
+        @await Component.InvokeAsync("MyInfoTab")
+        <div class="tab-content alert-white">
+            <div class="tab-pane tt-indent-none show active" role="tabpanel">
+                <div class="tt-wrapper-inner tt-layout-tab">
+                    @if (Model.Count <= 0)
+                    {
+                        <img src="/images/404.png">
+                    }
+                    else
+                    {
+                        @await Component.InvokeAsync("TopicList", Model)
+                        @await Component.InvokeAsync("Pagination", Model.ToPagination("Favorite", "My"))
+                    }
+                </div>
+               </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var loading = false;
+    function doCancelFavorite(id, element) {
+        if (loading) return;
+        loading = true;
+        $.post("@Url.Action("CancelFavorite", "My")?id=" + id, function (data) {
+            loading = false;
+            $(element).parent().parent().parent().fadeOut();
+        })
+    }
+</script>
+

@@ -1,0 +1,72 @@
+﻿@model AccountModel
+@{ bool followed = Convert.ToBoolean(ViewBag.Followed);}
+<div class="tt-wrapper-section">
+    <div class="container">
+        <div class="tt-user-header">
+            <div class="tt-col-avatar">
+                <div class="tt-icon">
+                    <img class="img-fluid" src="@Model.Avatar" alt="@Model.NickName" />
+                </div>
+            </div>
+            <div class="tt-col-title">
+                <div class="tt-title">
+                    <a href="#">@Model.NickName</a>
+                </div>
+                <ul class="tt-list-badge">
+                    <li><a href="#"><span class="tt-color11 tt-badge">积分 : @Model.Integral</span></a></li>
+                    <li><small>加入于：@Model.CreateTime.ToString("yyyy/MM/dd HH:mm")</small></li>
+                </ul>
+            </div>
+            <div class="tt-col-btn" id="js-settings-btn">
+                <div class="tt-list-btn">
+                    @if (UserModel.IsLogin)
+                    {
+                        @if (followed)
+                        {
+                            <button type="button" class="btn btn-success" onclick="doFollow(@Model.Id, this)" style="display:none"><i class="fa fa-plus"></i>关注</button>
+                            <button type="button" class="btn btn-primary" onclick="doCancelFollow(@Model.Id, this)"><i class="fa fa-close"></i>取消关注</button>
+
+                        }
+                        else
+                        {
+
+                            <button type="button" class="btn btn-success" onclick="doFollow(@Model.Id, this)"><i class="fa fa-plus"></i>关注</button>
+                            <button type="button" class="btn btn-primary" onclick="doCancelFollow(@Model.Id, this)" style="display:none"><i class="fa fa-close"></i>取消关注</button>
+                        }
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-success" onclick="doFollow(@Model.Id, this)"><i class="fa fa-plus"></i>关注</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var loading = false;
+    function doFollow(id, element) {
+        if (loading) return;
+        loading = true;
+        $.post("@Url.Action("Add", "Follow")?id=" + id, function (data) {
+            if (data.code === 1) {
+                loading = false;
+                $(element).hide().siblings().show();
+            } else {
+                alert(data.msg);
+            }
+        })
+    }
+    function doCancelFollow(id, element) {
+        if (loading) return;
+        loading = true;
+        $.post("@Url.Action("Delete", "Follow")?id=" + id, function (data) {
+            if (data.code === 1) {
+               loading = false;
+                $(element).hide().siblings().show();
+            } else {
+                alert(data.msg);
+            }
+        })
+    }
+</script>

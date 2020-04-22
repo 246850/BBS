@@ -1,0 +1,112 @@
+﻿@model AccountModel
+@{
+    ViewData["Title"] = "账号注册";
+}
+
+<div class="container">
+    <div class="tt-tab-wrapper">
+        <div class="tt-wrapper-inner">
+            <ul class="nav nav-tabs pt-tabs-default" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link show active" href="javascript:void(0)" ><span>注册</span></a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Account" asp-action="Login" class="nav-link"><span>登录</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade active show" id="tt-tab-01" role="tabpanel">
+                <div class="tt-wrapper-inner tt-layout-tab">
+                    <form asp-controller="Account" asp-action="Register" onsubmit="return doSubmit();" class="form-default">
+                        <div class="form-group">
+                            <label>账号</label>
+                            <input asp-for="Account1" type="text" class="form-control rounded-0" onkeyup="doCheckAccount(this)">
+                            <small class="form-text text-muted">限下划线、字母、数字组成，且首字符不能为数字，4至30个字符长度，不区分大小写</small>
+                        </div>
+                        <div class="form-group">
+                            <label>昵称</label>
+                            <input asp-for="NickName" type="text" class="form-control rounded-0">
+                            <small class="form-text text-muted">限2个字母至8个汉字字符长度，且不能包含空格</small>
+                        </div>
+                        <div class="form-group">
+                            <label>密码</label>
+                            <input asp-for="Password" type="password" class="form-control rounded-0">
+                            <small class="form-text text-muted">仅限下划线、字母、数字组成，6至20个字符长度，区分大小写</small>
+                        </div>
+                        <div class="form-group">
+                            <label>确认密码</label>
+                            <input id="passwordConfirm" type="password" class="form-control rounded-0">
+                        </div>
+                        <button id="btn_submit" type="submit" class="btn btn-secondary" disabled>注册</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var loading = false;
+    function doCheckAccount(element) {
+        if ($(element).val().isEmpty() || $(element).val().length < 4 || loading) {
+            $("#btn_submit").attr("disabled", "disabled");
+            return;
+        } 
+        loading = true;
+        $.post("@Url.Action("CheckAccount", "Account")?account=" +$(element).val(), function (flag) {
+            loading = false;
+            if (flag) {
+                layer.msg("此账号已注册，换一个吧");
+                $(element).focus();
+                $("#btn_submit").attr("disabled", "disabled")
+            } else {
+                $("#btn_submit").removeAttr("disabled");
+            }
+        })
+    }
+
+    function doSubmit() {
+        var $Account1 = $("#@Html.IdFor(model=> model.Account1)"),
+            $NickName = $("#@Html.IdFor(model=> model.NickName)"),
+            $Password = $("#@Html.IdFor(model=> model.Password)"),
+            $passwordConfirm = $("#passwordConfirm");
+        if (!/^[a-z|A-z|_]\w{3,29}$/.test($Account1.val())) {
+            layer.msg("账号格式不符合");
+            $Account1.focus();
+            return false;
+        }
+        if ($NickName.val().isEmpty() || getStringLength($NickName.val()) < 2 || getStringLength($NickName.val()) > 16) {
+            layer.msg("昵称格式不符合");
+            $NickName.focus();
+            return false;
+        }
+        if (!/^\w{6,20}$/.test($Password.val())) {
+            layer.msg("密码格式不符合");
+            $Password.focus();
+            return false;
+        }
+        if ($Password.val() !== $passwordConfirm.val()) {
+            layer.msg("两次密码不一致");
+            $passwordConfirm.focus();
+            return false;
+        }
+        return true;
+    }
+    // 英文占1个字符，中文汉字占2个字符
+    function getStringLength(s) {
+        var realLength = 0;
+        var len = s.length;
+        var charCode = -1;
+        for (var i = 0; i < len; i++) {
+            charCode = s.charCodeAt(i);
+            if (charCode >= 0 && charCode <= 128) {
+                realLength += 1;
+            } else {
+                // 如果是中文则长度加2 
+                realLength += 2;
+            }
+        }
+        return realLength;
+    }
+</script>
+
