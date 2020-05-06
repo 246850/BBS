@@ -107,6 +107,7 @@ namespace BBS.Web.Controllers
                 // 主题
                 var entity = model.MapTo<TopicModel, Topic>();
                 var now = DateTime.Now;
+                if (entity.CatalogId <= 0) { entity.CatalogId = 1; }
                 entity.AccountId = UserModel.Id;
                 entity.CreateTime = now;
                 entity.LastUpdateTime = now;
@@ -223,7 +224,7 @@ namespace BBS.Web.Controllers
                 _context.SaveChanges();
                 return Json(true.ToResult());
             }
-            catch(DbUpdateException ex)
+            catch (DbUpdateException ex)
             {
                 return Json(false.ToResult("请勿重复操作"));
             }
