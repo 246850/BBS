@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BBS.Web", "BBS.Web\BBS.Web.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BBS.Domain", "BBS.Domain\BBS.Domain.csproj", "{F7F5F491-6786-4402-B7A2-F33FF1D68C58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBS.Framework", "BBS.Framework\BBS.Framework.csproj", "{23E4E581-87E2-488F-A93E-DFEB5A31A772}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BBS.Framework", "BBS.Framework\BBS.Framework.csproj", "{23E4E581-87E2-488F-A93E-DFEB5A31A772}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBS.Models", "BBS.Models\BBS.Models.csproj", "{A4DAD037-7EBA-4F7E-ADF6-66B8503A4814}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BBS.Models", "BBS.Models\BBS.Models.csproj", "{A4DAD037-7EBA-4F7E-ADF6-66B8503A4814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBS.Requests", "BBS.Requests\BBS.Requests.csproj", "{8F2618F7-2D4A-487A-9927-3D17FF5A592D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BBS.Requests", "BBS.Requests\BBS.Requests.csproj", "{8F2618F7-2D4A-487A-9927-3D17FF5A592D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBS.ConsoleApp1", "BBS.ConsoleApp1\BBS.ConsoleApp1.csproj", "{E6AA74A5-2B75-448C-B4CA-4E8E9358C650}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BBS.Spider", "BBS.ConsoleApp1\BBS.Spider.csproj", "{E6AA74A5-2B75-448C-B4CA-4E8E9358C650}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

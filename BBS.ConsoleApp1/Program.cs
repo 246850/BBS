@@ -1,24 +1,45 @@
-﻿using System;
+﻿using BBS.Spider.Core;
+using BBS.Spider.Crawls;
+using Dapper;
+using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
+using System;
+using System.Data;
 using System.Net;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace BBS.ConsoleApp1
+namespace BBS.Spider
 {
     class Program
     {
         static void Main(string[] args)
         {
-            for(int i = 0; i <10; i++)
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            while (true)
             {
-                Task.Run(() => {
-                    WebClient client = new WebClient();
-                    client.Headers.Add("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                    string json = client.UploadString("https://localhost:44339/Comment/ThumbsUp", "ItemId=82&IsThumb=true");
-                    client.Dispose();
-                    Console.WriteLine(json);
-                });
+                ICrawl crawl = new xiaohua_zol_com_cn();
+                var items = crawl.Execute();
+                using (var connection = GetConnection())
+                {
+                    int rows = connection.Execute("INSERT INTO topic(Title, AccountId, CatalogId, Contents, ThumbsUpCount, ThumbsDownCount, TrailCount, CreateTime, LastUpdateTime) VALUES (@Title, @AccountId, @CatalogId, @Contents, 0, 0, 0, SYSDATE(), SYSDATE());", items);
+                    Console.WriteLine("插入条数：{0}", rows);
+                }
+
+                Thread.Sleep(60 * 60 * 1000);
             }
-            Console.ReadLine();
+
+        }
+
+        static IDbConnection GetConnection()
+        {
+            IConfiguration configuration = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory).AddJsonFile("appsettings.json").Build();
+            string connectionString = configuration.GetConnectionString("MySQL");
+            var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            return connection;
         }
     }
 }
